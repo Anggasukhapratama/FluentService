@@ -1,0 +1,9 @@
+flask
+flask-cors
+pymongo
+gtts
+textblob
+numpy
+opencv-python
+speechrecognition
+python-dotenv

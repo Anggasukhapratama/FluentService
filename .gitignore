@@ -1,0 +1,29 @@
+# Bytecode dan cache Python
+__pycache__/
+*.py[cod]
+
+# Environment virtual
+venv/
+env/
+ENV/
+.venv/
+
+# File konfigurasi dan rahasia
+.env
+
+# File sementara/editor
+*.swp
+*.swo
+*.bak
+
+# File aplikasi/hasil kompresi
+*.rar
+*.zip
+*.tar.gz
+
+# MacOS/Linux/Windows
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
