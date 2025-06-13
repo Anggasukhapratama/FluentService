@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Selamat Datang di Fluent{% endblock %}
+
+{% block content %}
+    <div class="landing-container">
+        <h1>Selamat Datang di Fluent!</h1>
+        <p>Platform terpadu Anda untuk peningkatan kemampuan wawancara, narasi, dan komunikasi.</p>
+        <p>Tingkatkan kepercayaan diri dan performa Anda dalam berbagai skenario komunikasi.</p>
+        
+        <div class="landing-buttons">
+            <a href="{{ url_for('web_auth_bp.web_login') }}" class="button primary">Login Web</a>
+            <!-- Anda bisa menambahkan link untuk registrasi jika Anda memiliki UI web untuk itu. 
+                 Untuk saat ini, registrasi mungkin masih via aplikasi mobile (API). -->
+            <p style="margin-top: 20px;">Daftar akun baru melalui aplikasi mobile kami.</p>
+        </div>
+    </div>
+
+    <style>
+        .landing-container {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        .landing-container h1 {
+            color: #007bff;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+        }
+        .landing-container p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .landing-buttons .button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+        .landing-buttons .button.primary:hover {
+            background-color: #0056b3;
+        }
+        /* Tambahkan style untuk button lain jika diperlukan */
+        /* .landing-buttons .button.secondary {
+            background-color: #6c757d;
+            margin-left: 15px;
+        }
+        .landing-buttons .button.secondary:hover {
+            background-color: #5a6268;
+        } */
+    </style>
+{% endblock %}

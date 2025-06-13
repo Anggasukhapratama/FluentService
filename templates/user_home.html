@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Halaman Utama Pengguna{% endblock %}
+
+{% block content %}
+    <h1>Selamat Datang, {{ username }}!</h1>
+    <p>Ini adalah halaman utama untuk pengguna biasa setelah login melalui antarmuka web.</p>
+    <p>Di sini Anda bisa menampilkan informasi profil, riwayat sesi, atau fitur lainnya yang relevan untuk pengguna non-admin.</p>
+    <p>Anda bisa kembali ke <a href="{{ url_for('web_auth_bp.web_logout') }}">Logout</a>.</p>
+{% endblock %}

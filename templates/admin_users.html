@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Kelola Pengguna{% endblock %}
+
+{% block content %}
+    <h1>Kelola Pengguna</h1>
+
+    {% if error %}
+        <p style="color: red;">Error: {{ error }}</p>
+    {% endif %}
+
+    {% if users %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Pekerjaan</th>
+                    <th>Admin?</th>
+                    <th>Terdaftar Sejak</th>
+                    <th>Login Terakhir</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user._id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.gender }}</td>
+                    <td>{{ user.occupation }}</td>
+                    <td>{{ 'Yes' if user.is_admin else 'No' }}</td>
+                    <td>{{ user.created_at }}</td>
+                    <td>{{ user.last_login if user.last_login else 'N/A' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Tidak ada pengguna yang ditemukan.</p>
+    {% endif %}
+{% endblock %}
