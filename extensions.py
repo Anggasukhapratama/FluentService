@@ -3,7 +3,11 @@ from flask_bcrypt import Bcrypt
 from flask_mail import Mail
 from flask_cors import CORS
 from flask_login import LoginManager # <--- NEW
-from database import get_collections # <--- NEW
+# from database import get_collections # <--- HAPUS BARIS INI!
+
+# Impor logging di sini agar logger bisa digunakan
+import logging
+logger = logging.getLogger(__name__) # Menggunakan __name__
 
 bcrypt = Bcrypt()
 mail = Mail()
@@ -16,7 +20,7 @@ login_manager.login_message = "Harap login untuk mengakses halaman ini."
 login_manager.login_message_category = "warning"
 
 class User: # <--- NEW: User class for Flask-Login compatibility
-    def __init__(self, user_data):
+    def __init__(self, user_data): # KOREKSI: __init__ bukan init
         self.user_data = user_data
 
     def is_authenticated(self):
@@ -45,13 +49,13 @@ class User: # <--- NEW: User class for Flask-Login compatibility
     def email(self):
         return self.user_data.get('email')
 
-
 @login_manager.user_loader # <--- NEW: User loader for Flask-Login
 def load_user(user_id):
     """
     Callback function that Flask-Login uses to reload the user object from the user ID stored in the session.
     """
     from bson import ObjectId # Import here to avoid circular dependency
+    from database import get_collections # <--- PASTIKAN INI ADA DI SINI
     users_collection = get_collections()["users"]
     try:
         user_doc = users_collection.find_one({"_id": ObjectId(user_id)})
@@ -59,15 +63,14 @@ def load_user(user_id):
             return User(user_doc)
         return None
     except Exception as e:
-        import logging
-        logging.getLogger(__name__).error(f"Error loading user {user_id}: {e}")
+        # Gunakan logger yang sudah didefinisikan di atas
+        logger.error(f"Error loading user {user_id}: {e}")
         return None
-
 
 def init_extensions(app):
     """Initializes Flask extensions with the given app instance."""
     bcrypt.init_app(app)
     mail.init_app(app)
-    login_manager.init_app(app) # <--- NEW: Initialize Flask-Login
+    login_manager.init_app(app)
     # CORS is typically initialized with the app instance itself or a blueprint
     # app.py will handle CORS init directly.

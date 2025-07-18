@@ -18,7 +18,7 @@ password_reset_tokens_collection = None
 otp_tokens_collection = None
 topics_collection = None            # Koleksi untuk topik diskusi
 login_history_collection = None     # <--- TAMBAHKAN INI: Deklarasi global untuk koleksi riwayat login
-
+interviews_collection = None
 
 def init_db():
     """Initializes the MongoDB client and collections."""
@@ -27,12 +27,12 @@ def init_db():
            sessions_collection, \
            login_attempts_collection, messages_collection, password_reset_tokens_collection, \
            otp_tokens_collection, topics_collection, \
-           login_history_collection # <--- TAMBAHKAN INI: Tambahkan ke deklarasi global
+           login_history_collection
 
     try:
         client = MongoClient(MONGO_URI)
         db = client["flutterauth"]
-        
+
         users_collection = db["users"]
         wawancara_collection = db["wawancara"]          # TETAP: Menggunakan koleksi "wawancara"
         interviews_collection = db["interviews"]        # NEW: Menggunakan koleksi "interviews" untuk fitur baru
@@ -42,8 +42,8 @@ def init_db():
         password_reset_tokens_collection = db["password_reset_tokens"]
         otp_tokens_collection = db["otp_tokens"]
         topics_collection = db["topics"]
-        login_history_collection = db["login_history"] # <--- TAMBAHKAN INI: Inisialisasi koleksi
-        
+        login_history_collection = db["login_history"]
+
         logger.info("MongoDB connected and collections initialized.")
     except Exception as e:
         logger.critical(f"Failed to connect to MongoDB: {e}")

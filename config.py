@@ -21,7 +21,7 @@ MAIL_DEFAULT_SENDER = ('Fluent', MAIL_USERNAME)
 # MongoDB Connection String
 MONGO_URI = "mongodb://localhost:27017/"
 
-# HRD Questions Database
+# HRD Questions Database (Existing)
 hrd_question_details = {
     "Ceritakan pengalaman kerja Anda yang paling menantang": {
         "keywords": ["tantangan", "solusi", "belajar", "mengatasi", "proyek"],
@@ -85,27 +85,38 @@ hrd_question_details = {
     }
 }
 
+hrd_questions_list = list(hrd_question_details.keys())
+
+# ======================== NEW: INTERVIEW TOPICS FOR GEMINI ========================
 INTERVIEW_TOPICS = {
-    "umum": {
-        "name": "Umum (Perkenalan Diri, dll.)",
-        "keywords": ["perkenalan", "diri", "latar belakang", "kekuatan", "kelemahan", "motivasi"],
-        "prompt_context": "Anda adalah seorang pewawancara HRD yang ingin memahami latar belakang dan kepribadian umum kandidat.",
+    "general": {
+        "name": "Umum (Perkenalan Diri, motivasi)",
+        "prompt_context": "Anda adalah seorang pewawancara HRD profesional. Fokus pada pertanyaan umum tentang latar belakang kandidat, motivasi, dan kesesuaian budaya kerja. Buat pertanyaan pembuka yang baik dan relevan.",
+        "keywords": ["perkenalan", "diri", "motivasi", "bekerja", "kelebihan", "kekurangan", "visi", "misi"],
     },
-    "perilaku": {
-        "name": "Perilaku (Metode STAR)",
-        "keywords": ["situasi", "tugas", "aksi", "hasil", "konflik", "tekanan", "tim"],
-        "prompt_context": "Anda adalah seorang pewawancara HRD yang fokus pada wawancara perilaku menggunakan metode STAR.",
-    },
-    "teknis_web_developer": {
+    "technical_web_developer": {
         "name": "Teknis - Web Developer",
-        "keywords": ["HTML", "CSS", "JavaScript", "Framework", "Backend", "Frontend", "API", "database", "git"],
-        "prompt_context": "Anda adalah seorang pewawancara teknis untuk posisi Web Developer. Pertanyaan harus mencakup aspek frontend dan backend.",
+        "prompt_context": "Anda adalah pewawancara teknis untuk posisi Web Developer. Tanyakan tentang pengalaman dengan HTML, CSS, JavaScript, framework (React/Angular/Vue), backend (Node.js/Python/PHP), database (SQL/NoSQL), dan Git.",
+        "keywords": ["HTML", "CSS", "JavaScript", "React", "Node.js", "Python", "SQL", "Git", "API", "framework"],
     },
-    "teknis_data_analyst": {
+    "technical_data_analyst": {
         "name": "Teknis - Data Analyst",
-        "keywords": ["SQL", "Python", "R", "Excel", "statistik", "visualisasi", "data cleaning", "big data"],
-        "prompt_context": "Anda adalah seorang pewawancara teknis untuk posisi Data Analyst. Pertanyaan harus mencakup pengolahan data, statistik, dan tools.",
+        "prompt_context": "Anda adalah pewawancara teknis untuk posisi Data Analyst. Tanyakan tentang keahlian dalam SQL, Python/R, Excel, statistik, visualisasi data, data cleaning, dan pemecahan masalah data.",
+        "keywords": ["SQL", "Python", "R", "Excel", "statistik", "visualisasi", "data cleaning", "big data", "analisis"],
+    },
+    "entrepreneurship": {
+        "name": "Kewirausahaan",
+        "prompt_context": "Anda adalah seorang investor dan pewawancara yang mencari talenta kewirausahaan. Tanyakan tentang ide bisnis, manajemen risiko, inovasi, kepemimpinan, dan adaptasi terhadap pasar.",
+        "keywords": ["bisnis", "inovasi", "startup", "resiko", "pemimpin", "pasar", "modal", "strategi", "tim"],
+    },
+    "leadership": {
+        "name": "Kepemimpinan",
+        "prompt_context": "Anda adalah pewawancara yang menilai potensi kepemimpinan. Tanyakan tentang pengalaman memimpin tim, mengambil keputusan sulit, memotivasi bawahan, dan menyelesaikan konflik internal.",
+        "keywords": ["kepemimpinan", "tim", "keputusan", "motivasi", "konflik", "delegasi", "visi", "mentoring"],
+    },
+    "problem_solving": {
+        "name": "Pemecahan Masalah",
+        "prompt_context": "Anda adalah pewawancara yang fokus pada kemampuan pemecahan masalah. Berikan skenario atau tanyakan pengalaman mereka dalam mengidentifikasi masalah, menganalisis akar penyebab, dan menerapkan solusi efektif.",
+        "keywords": ["masalah", "solusi", "analisis", "logika", "inovatif", "strategi", "data"],
     },
 }
-
-hrd_questions_list = list(hrd_question_details.keys())
